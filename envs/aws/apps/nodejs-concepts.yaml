@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nodejs-concepts
+  namespace: argocd
+spec:
+  destination:
+    namespace: nodejs-concepts
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/mguay22/argocd-demo
+    targetRevision: main
+    path: apps/nodejs-concepts
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
